@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HackerTracker - Let's Find Your Next Hackathon</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/hackertracker.css" rel="stylesheet">
+
+  <!-- added js -->
+  <script src="js/gmaps.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="js/locate.js"></script>
+
+  <style>
+    #map {
+      width: 100%;
+      height: 600px;
+    }
+    #logo {
+      width: 70px;
+      height: 50px;
+    }
+
+    .whitetext {
+      color: white;
+    }
+
+    .list-group{
+      position: absolute;
+      top:0;
+      margin:50px;
+      width:25%;
+    }
+
+    .nav{
+    max-height: 500px;
+    overflow-y:scroll;
+}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-1" style="padding-top:15px">
+        <img src="img/htlogo.png" class="image-responsive" id="logo">
+      </div>
+      <div class="col-xs-3">
+        <h1 class="whitetext">Hacking within</h1>
+      </div>
+      <div class="col-xs-1" style="padding-top:15px">
+        <input type="text" class="form-control input-lg" placeholder="420" id="max_distance">
+      </div>
+      <div class="col-xs-2">
+        <h1 class="whitetext"> miles of </h1>
+      </div>
+      <div class="input-group col-lg-5" style="padding-top:15px">
+        <input type="text" class="form-control input-lg" placeholder="Enter your location." id="loc_text">
+        <span class="input-group-btn">
+          <button class="btn btn-dark btn-lg" type="button" id="loc_button">Use My Location</button>
+        </span>
+      </div>
+    </div>
+    <br>
+    <div class="row" style="position:relative;">
+      <div id="map"></div>
+      <div class="list-group">
+        <ul class="nav" id="hackathons"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Google Maps JS API -->
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <!-- GMaps Library -->
+  <script>
+    /* Map Object */
+    var mapObj = new GMaps({
+      el: '#map',
+      lat: 40.4283,
+      lng: -86.9225,
+      zoom: 16
+    });
+  </script>
+</body>
+
+</html>
