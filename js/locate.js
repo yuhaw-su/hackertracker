@@ -831,7 +831,7 @@ $(document).ready(function(){
   {
    "image wrap": "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/550/thumb/wpi_splash.jpg?1480732070",
    "event logo": "https://s3.amazonaws.com/assets.mlh.io/events/logos/000/000/550/thumb/wpi_logo.png?1480732070",
-   "names": "[email_protected]",
+   "names": "Hack WPI",
    "urls": "http://hack.wpi.edu/",
    "start date": "1/13/17",
    "end date": "1/15/17",
@@ -864,7 +864,7 @@ $(document).ready(function(){
   {
    "image wrap": "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/475/thumb/66ae97867ceb-mlh_300x300.png?1475968961",
    "event logo": "https://s3.amazonaws.com/assets.mlh.io/events/logos/000/000/475/thumb/0fbdfaa86f1a-100x100.jpg?1475968961",
-   "names": "_n__mm_n Ha�ks",
+   "names": "Uncommon Hacks",
    "urls": "http://uncommonhacks.com/",
    "start date": "1/14/17",
    "end date": "1/15/17",
@@ -1161,7 +1161,7 @@ $(document).ready(function(){
   {
    "image wrap": "https://s3.amazonaws.com/assets.mlh.io/events/splashes/000/000/540/thumb/cewit_splash.png?1479488080",
    "event logo": "https://s3.amazonaws.com/assets.mlh.io/events/logos/000/000/540/thumb/cewit_logo.png?1479488080",
-   "names": "[email_protected]",
+   "names": "CewitHack",
    "urls": "http://www.cewit.org/hack/",
    "start date": "2/17/17",
    "end date": "2/19/17",
@@ -1559,23 +1559,20 @@ $(document).ready(function(){
                 maxWidth: 100
               }
             });
-            getHackathons(latlng.lat(), latlng.lng(), function(hackathons){
-              document.getElementById("hackathons").innerHTML = '';
-              hackathons.sort(function(a,b) {
-                return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
-              });
-              hackathons.forEach(function(h) {
-                mapObj.addMarker(h.marker);
-                document.getElementById("hackathons").innerHTML += '' +
-                  '<button type="button" class="list-group-item list-group-item-action flex-column align-items-start">' +
-                    '<div class="d-flex w-100 justify-content-between">' +
-                      '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
-                      '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
-                    '</div>' +
-                  '</button>';
-              });
-              currentHackathons = hackathons;
-              console.log(currentHackathons);
+            currentHackathons = getHackathons(latlng.lat(), latlng.lng());
+            document.getElementById("hackathons").innerHTML = '';
+            currentHackathons.sort(function(a,b) {
+              return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
+            });
+            currentHackathons.forEach(function(h) {
+              mapObj.addMarker(h.marker);
+              document.getElementById("hackathons").innerHTML += '' +
+                '<button type="button" class="list-group-item list-group-item-action flex-column align-items-start">' +
+                  '<div class="d-flex w-100 justify-content-between">' +
+                    '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
+                    '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
+                  '</div>' +
+                '</button>';
             });
           } else if (status == 'ZERO_RESULTS') {
             alert('Please enter your location.');
@@ -1608,22 +1605,20 @@ $(document).ready(function(){
               maxWidth: 100
             }
           });
-          getHackathons(latlng.lat(), latlng.lng(), function(hackathons){
-            document.getElementById("hackathons").innerHTML = '';
-            hackathons.sort(function(a,b) {
-              return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
-            });
-            hackathons.forEach(function(h) {
-              mapObj.addMarker(h.marker);
-              document.getElementById("hackathons").innerHTML += '' +
-                '<a href="'+h.url+'" class="list-group-item list-group-item-action flex-column align-items-start">' +
-                  '<div class="d-flex w-100 justify-content-between">' +
-                    '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
-                    '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
-                  '</div>' +
-                '</a>';
-            });
-            currentHackathons = hackathons;
+          currentHackathons = getHackathons(latlng.lat(), latlng.lng());
+          document.getElementById("hackathons").innerHTML = '';
+          currentHackathons.sort(function(a,b) {
+            return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
+          });
+          currentHackathons.forEach(function(h) {
+            mapObj.addMarker(h.marker);
+            document.getElementById("hackathons").innerHTML += '' +
+              '<button type="button" class="list-group-item list-group-item-action flex-column align-items-start">' +
+                '<div class="d-flex w-100 justify-content-between">' +
+                  '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
+                  '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
+                '</div>' +
+              '</button>';
           });
         } else if (status == 'ZERO_RESULTS') {
           alert('Please enter your location.');
@@ -1652,22 +1647,20 @@ $(document).ready(function(){
             maxWidth: 100
           }
         });
-        getHackathons(position.coords.latitude, position.coords.longitude, function(hackathons){
-          document.getElementById("hackathons").innerHTML = '';
-          hackathons.sort(function(a,b) {
-            return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
-          });
-          hackathons.forEach(function(h) {
-            mapObj.addMarker(h.marker);
-            document.getElementById("hackathons").innerHTML += '' +
-              '<button type="button" class="list-group-item list-group-item-action flex-column align-items-start">' +
-                '<div class="d-flex w-100 justify-content-between">' +
-                  '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
-                  '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
-                '</div>' +
-              '</button>';
-          });
-          currentHackathons = hackathons;
+        currentHackathons = getHackathons(position.coords.latitude, position.coords.longitude);
+        document.getElementById("hackathons").innerHTML = '';
+        currentHackathons.sort(function(a,b) {
+          return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
+        });
+        currentHackathons.forEach(function(h) {
+          mapObj.addMarker(h.marker);
+          document.getElementById("hackathons").innerHTML += '' +
+            '<button type="button" class="list-group-item list-group-item-action flex-column align-items-start">' +
+              '<div class="d-flex w-100 justify-content-between">' +
+                '<h5 class="mb-1">' + h.name + ' in ' + h.address + '</h5>' +
+                '<small>' + Math.round(h.distance * 100) / 100 + ' miles</small>' +
+              '</div>' +
+            '</button>';
         });
       },
       error: function(error) {
@@ -1679,7 +1672,7 @@ $(document).ready(function(){
     });
   });
 
-  function getHackathons(lat, lng, callback) {
+  function getHackathons(lat, lng) {
     var closeHackathons = [];
 
     // get the list of hackathons and pertinent information
@@ -1689,58 +1682,36 @@ $(document).ready(function(){
     }
     hackathonList.forEach(function(hackathon)
     {
-      GMaps.geocode({
-        address: hackathon.location,
-        callback: function(results, status) {
-          if (status == 'OK') {
-            console.log("processing " + hackathon.names + ' with maxDistance ' + maxDistance);
-            var endLatLng = results[0].geometry.location;
-            var distance = getDistanceFromLatLonInMiles(lat, lng, endLatLng.lat(), endLatLng.lng());
-            if (distance <= maxDistance)
-            {
-              // var marker = {
-              //   lat: latlng.lat(),
-              //   lng: latlng.lng(),
-              //   title: 'hah fuck you',
-              //   infoWindow: {
-              //     content: '<h5>'+"hah fuck you"+'</h5>',
-              //     maxWidth: 100
-              //   }
-              // };
-              var h = {
-                name: hackathon.names,
-                address : hackathon.location,
-                lat : endLatLng.lat(),
-                lng : endLatLng.lng(),
-                distance: distance,
-                url: hackathon.urls,
-                sd: hackathon["start date"],
-                ed: hackathon["end date"],
-                marker: {
-                  lat: endLatLng.lat(),
-                  lng: endLatLng.lng(),
-                  title: hackathon.names,
-                  infoWindow: {
-                    content: '<h5>'+hackathon.names+'</h5><a href="'+hackathon.urls+'">Visit '+hackathon.names+"'s site.</a>",
-                    maxWidth: 200
-                  }
-                }
-              };
-              closeHackathons.push(h);
-              console.log("added " + hackathon);
-              closeHackathons.forEach(function(f){
-                console.log(f);
-              });
-              callback(closeHackathons);
+      console.log("processing " + hackathon.names + ' with maxDistance ' + maxDistance);
+      var distance = getDistanceFromLatLonInMiles(lat, lng, hackathon.latitude, hackathon.longitude);
+      if (distance <= maxDistance)
+      {
+        var h = {
+          name: hackathon.names,
+          address : hackathon.location,
+          lat : hackathon.latitude,
+          lng : hackathon.longitude,
+          distance: distance,
+          url: hackathon.urls,
+          sd: hackathon["start date"],
+          ed: hackathon["end date"],
+          marker: {
+            lat: hackathon.latitude,
+            lng: hackathon.longitude,
+            title: hackathon.names,
+            // icon: hackathon["event logo"],
+            infoWindow: {
+              content: '<h5>'+hackathon.names+'</h5><a href="'+hackathon.urls+'">Visit '+hackathon.names+"'s site.</a>",
+              maxWidth: 200
             }
-          } else if (status == 'ZERO_RESULTS') {
-            alert('Sorry, no location named ' + address);
           }
-          else {
-            console.log(status);
-          }
-        }
-      });
+        };
+        closeHackathons.push(h);
+        console.log("added " + hackathon);
+        closeHackathons.forEach(function(f){
+          console.log(f);
+        });
+      }
     });
 
     return closeHackathons;
