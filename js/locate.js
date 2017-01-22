@@ -1,6 +1,10 @@
 $(document).ready(function(){
   var startMarker = 'img/startMarker.png';
   var currentHackathons = [];
+  var hackathonList = [];
+  // var pls = $.getJSON('http://localhost:8000/hackathons.json', function(data) {
+      //data is the JSON string
+  });
 
   var mapObj = new GMaps({
     el: '#map',
@@ -339,5 +343,6 @@ $(document).ready(function(){
   function deg2rad(deg) {
     return deg * (Math.PI/180)
   }
+
 
 });
