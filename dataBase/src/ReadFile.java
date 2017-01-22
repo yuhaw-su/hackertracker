@@ -53,9 +53,9 @@ public class ReadFile {
     // Since 2.10.0, uses MongoClient
     MongoClient mongoClient = new MongoClient("mongodb://1:1@ds117109.mlab.com:17109/hackertracker", 17109);
 
-    private DB hackathonDataBase = mongoClient.getDB("hackertracker");
+    private DB hackertracker = mongoClient.getDB("hackertracker");
 
-    private DBCollection hackathonDataCollection = hackathonDataBase.getCollection("hackathonDataCollection");
+    private DBCollection hackathonDataCollection = hackertracker.getCollection("hackathonDataCollection");
 
     private BasicDBObject document = new BasicDBObject();
 
