@@ -26,7 +26,7 @@ var findContent = function(response) {
         console.dir(docs);
         results = JSON.stringify(docs);
         response.write(results+'\n');
-        fs.writeFile('hackathons.json', results);
+        fs.writeFile('test.json', results);
       });
   });
 };
