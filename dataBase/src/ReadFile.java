@@ -12,6 +12,9 @@ import java.util.List;
   */
 public class ReadFile {
 
+    /**
+     * when pulling data from the mlh website, it gets saved in this file...
+     */
     private Document doc;
 
     /**
@@ -19,33 +22,37 @@ public class ReadFile {
      *     
      */
     private List<String> nameList = new ArrayList<String>();
+    
     /**
      *     * list of urls
      *    
      */
     private List<String> urlList = new ArrayList<String>();
+    
     /**
      *     * list of start dates
      *     
      */
     private List<String> startDateList = new ArrayList<String>();
+    
     /**
      *     * list of end dates
      *     
      */
     private List<String> endDateList = new ArrayList<String>();
+    
     /**
      *     * list of locations
      *    
      */
     private List<String> locationList = new ArrayList<String>();
+    
     /**
      *     * list of event logos
      *    
      */
     private List<String> eventLogoImageWrapLinkList = new ArrayList<String>();
-
-    private boolean printMode = false;
+    
     /*char[] password = {'h', 'a', 'c', 'k', 'e', 'r', '1'};
 
     MongoCredential credential = MongoCredential.createCredential("hacker1", "hackertracker", password);*/
@@ -60,7 +67,7 @@ public class ReadFile {
     private BasicDBObject document = new BasicDBObject();
 
     /**
-     *     * constructor that runs the function readFile()
+     * constructor that runs the function readFile()
      */
     public ReadFile() {
     /*serverConnection();*/
@@ -68,26 +75,31 @@ public class ReadFile {
     }
 
     /**
-     *      * this is a function that reads the
-     *     
+     * this is a function that reads the data and parse them into several categories...
+     * it also prints the data out...
      */
     private void readFileAndWriteDataToList() {
         try {
             doc = Jsoup.connect("https://mlh.io/seasons/na-2017/events").get();
+            
             getEventLogoImageWrap();
             System.out.println("event logo image wrap");
             printList(eventLogoImageWrapLinkList);
+         
             getNames();
             System.out.println("names");
             printList(nameList);
+         
             getUrls();
             System.out.println("urls");
             printList(urlList);
+         
             getDates();
             System.out.println("start date");
             printList(startDateList);
             System.out.println("end date");
             printList(endDateList);
+         
             getLocations();
             System.out.println("location");
             printList(locationList);
@@ -97,7 +109,7 @@ public class ReadFile {
     }
 
     /**
-     *     * get event logo urls, one can use the urls to create a new, better-looking, website
+     * get event logo urls, one can use the urls to create a new, better-looking, website
      *   
      */
     private void getEventLogoImageWrap() {
@@ -114,8 +126,7 @@ public class ReadFile {
     }
 
     /**
-     *     * get the names for the hackathons
-     *   
+     * get the names for the hackathons
      */
     private void getNames() {
         Elements names = doc.select("h3[itemprop]");
@@ -128,8 +139,7 @@ public class ReadFile {
     }
 
     /**
-     *     * get the urls for all the hackathon events so one can click on them
-     *    
+     * get the urls for all the hackathon events so one can click on them
      */
     private void getUrls() {
         Elements urls = doc.select("a[href]");
@@ -142,8 +152,7 @@ public class ReadFile {
     }
 
     /**
-     *     * get the start dates and end dates for the hackathon events
-     *   
+     * get the start dates and end dates for the hackathon events
      */
     private void getDates() {
         Elements dates = doc.select("meta[itemprop]");
@@ -186,30 +195,12 @@ public class ReadFile {
         }
     }
 
+    /**
+     * this function prints a list of strings
+     */
     private void printList(List<String> data) {
         for(String datum : data) {
             System.out.println(datum);
         }
     }
 }
-
-    /**
-     * connect to mySQL server
-     */
-    /*private boolean serverConnection() {
-        String url = "jdbc:mysql://localhost:3306";
-        String username = "root";
-        String password = "";
-
-        System.out.println("Connecting database...");
-
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Database connected!");
-            return true;
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
-        } catch (ClassNotFoundException cnfe) {
-            throw new IllegalStateException("No class found!", cnfe);
-        }
-    }*/
